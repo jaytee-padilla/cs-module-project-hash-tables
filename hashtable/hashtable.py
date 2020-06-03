@@ -1,3 +1,5 @@
+from singly_linked_list import LinkedList
+
 class HashTableEntry:
     """
     Linked List hash table key/value pair
@@ -22,7 +24,8 @@ class HashTable:
 
     def __init__(self, capacity):
         # Your code here
-        pass
+        self.capacity = capacity
+        self.buckets = [None] * capacity
 
 
     def get_num_slots(self):
@@ -36,7 +39,7 @@ class HashTable:
         Implement this.
         """
         # Your code here
-        pass
+        return len(self.bucket)
 
 
     def get_load_factor(self):
@@ -90,8 +93,8 @@ class HashTable:
         Implement this.
         """
         # Your code here
-        slot = hash_index(key)
-        
+        slot = self.hash_index(key)
+        self.bucket[slot] = value
 
 
     def delete(self, key):
@@ -103,7 +106,7 @@ class HashTable:
         Implement this.
         """
         # Your code here
-        pass
+        self.put(key, None)
 
 
     def get(self, key):
@@ -115,7 +118,13 @@ class HashTable:
         Implement this.
         """
         # Your code here
-        pass
+        slot = self.hash_index(key)
+        hash_entry = self.bucket[slot]
+
+        if hash_entry is not None:
+            return hash_entry
+
+        return None
 
 
     def resize(self, new_capacity):
